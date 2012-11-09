@@ -43,12 +43,10 @@ public class RequestNameParser {
         else {
             service = _path.substring(1);
         }
-        
         if( req.getContextPath() != null && req.getContextPath().trim().length()>0 && !req.getContextPath().equals("/") ) {
             context = req.getServletPath();
             context = context.substring(context.lastIndexOf("/")+1);
         }
-        
         this.request = req;
         host = req.getLocalName() + ":" + req.getLocalPort();
     }

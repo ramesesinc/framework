@@ -21,6 +21,7 @@ public abstract class AbstractTaskProcessor implements Serializable, Runnable  {
     private ScheduleManager manager;
     protected LinkedBlockingQueue<TaskBean> queue = new LinkedBlockingQueue();
     
+    
     AbstractTaskProcessor(ScheduleManager sm) {
         this.manager = sm;
     }
@@ -44,5 +45,7 @@ public abstract class AbstractTaskProcessor implements Serializable, Runnable  {
         return manager;
     }
     
-    
+    public  void close() {
+        
+    }
 }

@@ -79,4 +79,7 @@ public abstract class Module extends HashMap {
         this.project = project;
     }
     
+    public String getDomain() {
+        return (String) super.get("domain");
+    }
 }

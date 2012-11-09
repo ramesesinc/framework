@@ -42,7 +42,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>JsonScriptInvoker</servlet-name>
-        <url-pattern>/json/*</url-pattern>
+        <url-pattern>*.json</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>

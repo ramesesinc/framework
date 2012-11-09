@@ -12,8 +12,7 @@ package com.rameses.osiris2;
 
 public interface SecurityProvider {
 
-    boolean checkRoles(String name);
-    boolean checkPermission(String name);
+    boolean checkPermission(String domain, String role, String name);
     
     
 }

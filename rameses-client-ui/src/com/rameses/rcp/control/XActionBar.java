@@ -133,10 +133,13 @@ public class XActionBar extends JPanel implements UIComposite {
             for (Action action: actions) {
                 //check permission
                 String permission = action.getPermission();
+                String role = action.getRole();
+                String domain = action.getDomain();
+                /*
                 if (permission != null && binding.getController().getName() != null)
                     permission = binding.getController().getName() + "." + permission;
-                
-                boolean allowed = ControlSupport.isPermitted(permission);
+                */
+                boolean allowed = ControlSupport.isPermitted(domain, role, permission);
                 if (!allowed) continue;
                 
                 XButton btn = createButton(action);

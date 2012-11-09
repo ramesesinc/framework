@@ -28,6 +28,7 @@ public final class InvokerHelper {
         StringBuffer sb = new StringBuffer();
         if(np.getContext()!=null) sb.append( np.getContext() + "/");
         sb.append(np.getService()+"/local");
+        
         Object bean = ctx.lookup(sb.toString());
         
         Method[] methods = InvokerHelper.getMethodByName(bean, np.getAction(), values.length);

@@ -39,7 +39,6 @@ public class ServiceInfoServlet extends HttpServlet {
             if(AnubisContext.getCurrentContext().getModule()!=null) {
                 path = path.substring( path.indexOf("/",1)+1 );
             }
-            
             Map info = project.getServiceManager().getClassInfo( path );
             StringWriter w = new StringWriter();
             if( info !=null ) {

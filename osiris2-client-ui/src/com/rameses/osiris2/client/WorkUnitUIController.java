@@ -122,7 +122,7 @@ public class WorkUnitUIController extends UIController
         //check first if the workunit has already started.
         //if it has already started, fire the transition.
         //The subprocess normnally calls _close:signalAction.
-        if( workunit.getPageFlow()!=null && workunit.isStarted()) {
+       if( workunit.getPageFlow()!=null && workunit.isStarted()) {
             if(action ==null) {
                 workunit.signal();
             } else {

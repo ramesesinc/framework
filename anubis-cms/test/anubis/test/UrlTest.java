@@ -26,7 +26,7 @@ public class UrlTest extends TestCase {
     }
     
     // TODO add test methods here. The name must begin with 'test'. For example:
-    public void testHello() {
+    public void xtestHello1() {
         /*
         NameParser np = new NameParser("/products/[category]/[product]", "product/page");
         System.out.println("tokens are->"+np.getTokens());
@@ -47,6 +47,10 @@ public class UrlTest extends TestCase {
         if (foundIt) {
             System.out.println(searchMe.substring(i, i+len));
         }
+    }
+    
+    public void testHello() {
+        System.getProperties().list(System.out);
     }
     
 }

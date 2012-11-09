@@ -85,9 +85,10 @@ public abstract class AppContext {
             Module mod = new Module(this, u);
             String platform = (String)props.get("platform");
             String channel = (String)props.get("channel");
+            String domain = (String)props.get("domain");
             mod.setPlatform(platform);
             mod.setChannel(channel);
-            
+            mod.setDomain(domain);
             ParserUtil.updateAttributes(mod,mod.getProperties(),props, propertyResolver);
             modules.put( mod.getNamespace(), mod );
             moduleParser.parse( mod );

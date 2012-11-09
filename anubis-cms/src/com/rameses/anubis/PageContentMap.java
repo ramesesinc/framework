@@ -25,7 +25,7 @@ public class PageContentMap extends HashMap {
     private Map params;
     private CMSHelper cmsHelper;
     private Map pageWrapper;
-    private boolean editable = true;
+    private boolean editable = false;
     
     private PageFileHandler fileHandler;
     
@@ -35,6 +35,7 @@ public class PageContentMap extends HashMap {
         this.cmsHelper =  new CMSHelper();
         this.pageWrapper = page.toMap();
         this.fileHandler = h;
+        this.editable = page.getProject().isEditable();
     }
     
     public Object get(Object key) {

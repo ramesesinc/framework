@@ -9,9 +9,9 @@
 
 package com.rameses.anubis.web;
 
+import com.rameses.anubis.ContentUtil;
 import com.rameses.anubis.Module;
 import com.rameses.anubis.NameParser;
-import com.rameses.anubis.NameParser.MatchResult;
 import com.rameses.anubis.Project;
 import com.rameses.anubis.Theme;
 import com.rameses.anubis.custom.CustomProject;
@@ -29,12 +29,13 @@ import java.util.Map;
  */
 public class ProjectResolver {
     
-    private boolean cached;
     private List<NameParser> nameParsers = new ArrayList();
     private Map<String, Project> projects = new Hashtable();
     
     private Module defaultModule;
     private Theme defaultTheme;
+    
+    private NameParser defaultNameParser;
     
     /** Creates a new instance of ProjectResolver */
     public ProjectResolver(InputStream is) {
@@ -46,24 +47,36 @@ public class ProjectResolver {
                 if( text.startsWith("#")) return;
                 String key = text.substring(0, text.indexOf("=")).trim();
                 String value = text.substring(text.indexOf("=")+1).trim();
+                
+                value = ContentUtil.replaceSysProperty(value);
+                
                 NameParser np = new NameParser(key, value);
-                nameParsers.add( np );    
+                nameParsers.add( np );   
+                if(key.equalsIgnoreCase("default")) {
+                    defaultNameParser = np;
+                }
             }
         });
     }
-    
-    
+    /*
     public Project findProject(String serverName) {
         NameParser np = findNameParser(serverName);
         MatchResult nr = np.buildResult( serverName );
         return getProjectFromUrl( nr.getResolvedPath());
-        //return getProjectFromUrl( np.getResolvedTargetPath( serverName ));
     }
+     */
+    
     //return only the first one that matches
     public NameParser findNameParser(String path) {
         for(NameParser np : nameParsers ) {
            if( np.matches(path)) return np;
         }
+        
+        //if name parser is not found, use default instead
+        if(defaultNameParser!=null) {
+            return defaultNameParser;
+        }
+        
         throw new RuntimeException("Path does not match any registered patterns");
     }
     
@@ -75,7 +88,7 @@ public class ProjectResolver {
         CustomProject project = new CustomProject(name, urlName);
         if(defaultModule!=null) project.setSystemModule( defaultModule );
         if( defaultTheme !=null) project.setSystemTheme( defaultTheme );
-        if(cached) {
+        if(project.isCached()) {
             projects.put( urlName, project );
         }
         return project;
@@ -89,12 +102,5 @@ public class ProjectResolver {
         this.defaultTheme = defaultTheme;
     }
     
-    public boolean isCached() {
-        return cached;
-    }
-    
-    public void setCached(boolean cached) {
-        this.cached = cached;
-    }
     
 }

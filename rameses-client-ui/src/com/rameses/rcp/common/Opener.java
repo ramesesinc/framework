@@ -24,6 +24,8 @@ public class Opener {
     
     private UIController controller;
     private UIController caller;
+    private String role;
+    private String domain;
     
     private Map properties = new HashMap();
     private OpenerLoader loader;
@@ -156,6 +158,22 @@ public class Opener {
     
     public static interface OpenerLoader {
         void load( Opener o );
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getDomain() {
+        return domain;
+    }
+
+    public void setDomain(String domain) {
+        this.domain = domain;
     }
 
    

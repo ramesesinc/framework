@@ -1,0 +1,19 @@
+1. extract role,permission
+2. export into database
+3. 
+
+class PermissionExtractor {
+
+    @PersistenceContext("system")
+    def em;
+
+    @ProxyMethod
+    public void reindex() {
+       String f = "filepath";
+       PermissionIndexer p = new PermissionIndexer(f);
+       def list = p.getList();
+       list.each {
+           em.create( "permission", it ); 
+       }
+    }
+}

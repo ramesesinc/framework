@@ -35,6 +35,23 @@ public class Folder {
         return meta;
     }
     
-    
+    public List<File> getAllowedChildren() {
+        AnubisContext ctx = AnubisContext.getCurrentContext();
+        if(ctx==null || ctx.getSession()==null) return getChildren();
+        SessionContext sctx = ctx.getSession();
+        List list = new ArrayList();
+        for(File f: getChildren()) {
+            String domain = f.getDomain();
+            String role = f.getRole();
+            String permission = f.getPermission();
+            boolean checkPerms = (role!=null || permission!=null);
+            boolean pass = true;
+            if( checkPerms ) {
+                pass = sctx.checkPermission(domain, role, permission);
+            }
+            if(pass) list.add(f);
+        }
+        return list;
+    }
     
 }

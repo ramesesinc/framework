@@ -38,11 +38,11 @@ public class SchedulerService implements Serializable, SchedulerServiceMBean {
     
     
     public void start() throws Exception {
+        
         System.out.println("STARTING SCHEDULER 2");
         datasource = AppContext.getSystemDs();
         SqlContext sqlc = SqlManager.getInstance().createContext(datasource);
         sqlc.setDialect(AppContext.getDialect("system", null));
-        
         SqlExecutor sqe = sqlc.createNamedExecutor("scheduler:load-tasks");
         sqe.setParameter("host", "");
         sqe.execute();
@@ -188,6 +188,10 @@ public class SchedulerService implements Serializable, SchedulerServiceMBean {
 
             this.scheduleManager.getSuspendedTasks().getSuspended().remove(id);
             this.scheduleManager.getErrorTasks().getTasks().remove(id);
+            
+            this.scheduleManager.getFinishedTasks().close();
+            this.scheduleManager.getActiveTasks().close();
+            this.scheduleManager.getPendingTasks().close();
         }
         catch(Exception e) {
             e.printStackTrace();

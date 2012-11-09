@@ -29,6 +29,7 @@ public class Module {
     private String name;
     private String title;
     private String contextPath;
+    private String domain;
     private Map properties = new HashMap();
     private Map workunits = new Hashtable();
     private List invokers = new ArrayList();
@@ -125,6 +126,14 @@ public class Module {
     
     public AppContext getAppContext() {
         return context;
+    }
+
+    public String getDomain() {
+        return domain;
+    }
+
+    public void setDomain(String domain) {
+        this.domain = domain;
     }
     
     

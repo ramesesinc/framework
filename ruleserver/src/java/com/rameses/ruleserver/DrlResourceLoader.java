@@ -77,10 +77,10 @@ public class DrlResourceLoader implements URLFilter {
     
     
     public void load() throws Exception {
-        loadFromDb("facts");
         loadFromClasspath( "facts" );
-        loadFromDb( "rules" );
         loadFromClasspath( "rules" );
+        loadFromDb("facts");
+        loadFromDb( "rules" );
     }
     
 }

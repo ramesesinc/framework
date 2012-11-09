@@ -49,11 +49,13 @@ public class OsirisAppLoader implements AppLoader {
             ctx.setAppEnv(env);
             
             OsirisContext.setSession(startupApp);
+            /*
             if( env.get("CLIENT_PERMISSIONS") != null ) {
                 List permissions = (List) env.remove("CLIENT_PERMISSIONS");
                 OsirisSecurityProvider scp = (OsirisSecurityProvider) OsirisContext.getSession().getSecurityProvider();
                 scp.getPermissions().addAll(permissions);
             }
+             */
             if( env.get("CLIENT_ENV") != null ) {
                 Map clientEnv = (Map) env.remove("CLIENT_ENV");
                 OsirisContext.getEnv().putAll( clientEnv );

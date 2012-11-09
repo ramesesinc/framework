@@ -92,7 +92,7 @@ public class PageFileInstance extends FileInstance {
                     map.put("content", result);
                 }
             } catch(Exception ign){;}
-            if( path.lastIndexOf("_") <=0 ) break;
+            if( spath.lastIndexOf("_") <=0 ) break;
             spath = spath.substring(0, spath.lastIndexOf("_"));
         }
         if(result == null)

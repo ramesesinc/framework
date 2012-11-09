@@ -68,6 +68,22 @@ public abstract class FileInstance {
         return params;
     }
     
+    public boolean isFragment() {
+        return file.isFragment();
+    }
+    
+    public String getPermission(){
+        return file.getPermission();
+    }
+    
+    public String getDomain(){
+        return file.getDomain();
+    }
+    
+    public String getRole(){
+        return file.getRole();
+    }
+    
     public void setParams(Map params) {
         this.params = params;
     }

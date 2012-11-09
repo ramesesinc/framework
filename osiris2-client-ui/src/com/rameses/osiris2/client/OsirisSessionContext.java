@@ -16,7 +16,6 @@ import com.rameses.platform.interfaces.MainWindow;
 import com.rameses.rcp.framework.ClientContext;
 import java.awt.EventQueue;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import javax.swing.JMenuBar;
 
@@ -55,9 +54,6 @@ public class OsirisSessionContext extends SessionContext {
         });
     }
     
-    public List getPermissions() {
-        return ((OsirisSecurityProvider)getSecurityProvider()).getPermissions();
-    }
     
     public Map getProfile() {
         return profile;

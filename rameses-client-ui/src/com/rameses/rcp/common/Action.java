@@ -26,11 +26,15 @@ public class Action implements Comparable<Action> {
     private char mnemonic;
     private boolean immediate;
     private Map properties = new Hashtable();
-    private String permission;
+    
     private Map parameters = new HashMap();
     private boolean update;
     private String tooltip;
     private String visibleWhen;
+    
+    private String role;
+    private String domain;
+    private String permission;
     
     public Action() {
         
@@ -72,7 +76,7 @@ public class Action implements Comparable<Action> {
     public String getCaption() {
         if ( ValueUtil.isEmpty(caption) && !ValueUtil.isEmpty(properties.get("caption")))
             return properties.get("caption")+"";
-            
+        
         return caption;
     }
     
@@ -136,7 +140,7 @@ public class Action implements Comparable<Action> {
     public char getMnemonic() {
         if ( mnemonic == '\u0000' && !ValueUtil.isEmpty(properties.get("mnemonic")))
             return (properties.get("mnemonic")+"").charAt(0);
-            
+        
         return mnemonic;
     }
     
@@ -212,5 +216,21 @@ public class Action implements Comparable<Action> {
         this.visibleWhen = visibleWhen;
     }
     //</editor-fold>
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getDomain() {
+        return domain;
+    }
+
+    public void setDomain(String domain) {
+        this.domain = domain;
+    }
     
 }

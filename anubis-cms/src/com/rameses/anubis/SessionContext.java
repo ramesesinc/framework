@@ -20,20 +20,22 @@ public abstract class SessionContext {
     
     //this is used to store any kind of information that will be retained
     //until the request is completed
-    private Map info = new HashMap();
-
+    protected Map info = new HashMap();
+   
     public Map getInfo() {
         return info;
     }
+    
+    public abstract Map getEnv();
+    
     
     public abstract String getSessionid();
     public abstract Map createSession(Map info);
     public abstract Map destroySession();
     public abstract Map getSession();
     public abstract Map getUserPrincipal();
-    public abstract boolean checkFilePermission(FileInstance file);
-    public abstract boolean checkPermission(String key);
-    public abstract boolean checkRole(String role);
+    public abstract boolean checkPermission(String domain, String role, String key);
+    
 
     public boolean isLoggedIn() {
         return ( getSession()!=null );

@@ -96,26 +96,40 @@ public abstract class FileManager {
     
     /**
      * this method is called from the web server.
-     * it checks if the page is passed through a url mapping or not.
+     * check first of file exists having the correct name.
+     * If not, test the registered url mapping if any matches
+     * otherwise throw a file not found error.
      */
     public FileInstance getFile(String name, Map params) {
         if(params==null) params = new HashMap();
-        if( fileCache.containsKey( name )) {
-            return createInstance( getFileInfo(name), params );
+        
+        File file = null;
+        try {
+            file = getFileInfo(name);
+        } catch( com.rameses.anubis.FileNotFoundException fe) {
+            //do nothing
+        } catch(Exception e) {
+            throw new RuntimeException(e);
         }
         
-        /* check url mapping first*/
-        String pageName = name.substring(0, name.lastIndexOf("."));   
-        for(NameParser m: project.getUrlMapping()) {
-            if( m.matches(pageName)) {
-                NameParser.MatchResult mr = m.buildResult(pageName);
-                name = mr.getResolvedPath();
-                params.putAll( mr.getTokens() );
-                break;
+        //test the url mappings if file is null.
+        if(file==null) {
+            String pageName = name.substring(0, name.lastIndexOf("."));
+            String resolvedName = null;
+            for(NameParser m: project.getUrlMapping()) {
+                if( m.matches(pageName)) {
+                    NameParser.MatchResult mr = m.buildResult(pageName);
+                    resolvedName = mr.getResolvedPath();
+                    params.putAll( mr.getTokens() );
+                    break;
+                }
             }
-            
+            if(resolvedName == null)
+                throw new com.rameses.anubis.FileNotFoundException(name);
+            file = getFileInfo(resolvedName);
         }
-        return createInstance( getFileInfo(name), params );
+        
+        return createInstance( file, params );
     }
     
     

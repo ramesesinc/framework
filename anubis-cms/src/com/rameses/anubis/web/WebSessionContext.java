@@ -11,7 +11,6 @@ package com.rameses.anubis.web;
 
 import com.rameses.anubis.ActionManager;
 import com.rameses.anubis.AnubisContext;
-import com.rameses.anubis.FileInstance;
 import com.rameses.anubis.SessionContext;
 import com.rameses.anubis.UserPrincipal;
 import java.util.HashMap;
@@ -28,15 +27,14 @@ public class WebSessionContext extends SessionContext {
     private static String GET_USER = "session/getUserPrincipal";
     private static String GET_SESSION = "session/getSession";
     private static String REMOVE_SESSION = "session/removeSession";
-    private static String HAS_FILE_PERMISSION = "session/checkFilePermission";
     private static String HAS_PERMISSION = "session/checkPermission";
-    private static String HAS_ROLE = "session/checkRole";
-    
+     
     private Map session;
     private UserPrincipal user;
     private String sessionid;
     
     WebSessionContext() {
+        
     }
     
     
@@ -70,27 +68,20 @@ public class WebSessionContext extends SessionContext {
     }
     
     public Map getUserPrincipal() {
-        if( this.sessionid == null  ) return null;
-        return (Map)execute(GET_USER, null);
+        //if( this.sessionid == null  ) return null;
+        Map m = (Map)execute(GET_USER, null);
+        return m;
     }
     
-    public boolean checkFilePermission(FileInstance file) {
-        Map map = new HashMap();
-        map.put("file", file);
-        return (Boolean) execute(HAS_FILE_PERMISSION, map);
-    }
     
-    public boolean checkPermission(String key) {
+    public boolean checkPermission(String domain, String role, String permission) {
         Map map = new HashMap();
-        map.put("key", key );
+        map.put("domain", domain );
+        map.put("role", role );
+        map.put("permission", permission );
         return (Boolean) execute(HAS_PERMISSION, map);
     }
     
-    public boolean checkRole(String role) {
-        Map map = new HashMap();
-        map.put("role", role );
-        return (Boolean) execute(HAS_ROLE, map);
-    }
     
     private Object execute(  String action, Map params ) {
         try {
@@ -102,5 +93,13 @@ public class WebSessionContext extends SessionContext {
         }
     }
     
+    private Map env;
     
+    public Map getEnv() {
+        if(env==null) {
+            env = new HashMap();
+            env.put(CmsWebConstants.SESSIONID, this.sessionid);
+        }
+        return env;
+    }
 }

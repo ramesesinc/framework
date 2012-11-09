@@ -97,6 +97,7 @@ public class PageFlowInstance {
     }
     
     private boolean isRendered(Transition t, Map map) {
+        //do not render if it does not match the permissions
         if( t.getRendered() != null ) {
             try {
                 Object o = evalExpr(t.getRendered(), map);

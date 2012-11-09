@@ -26,11 +26,13 @@ public class ActiveTaskProcessor extends AbstractTaskProcessor {
     }
     
     public void run() {
-        TaskBean t = null;
         ExecutorService executors = Executors.newCachedThreadPool();
+        TaskBean t = null;
         while( (t=queue.poll())!=null ) {
             executors.submit( new TaskExecutor(this.getManager(), t) );
         }
+        executors.shutdown();
     }
+    
     
 }

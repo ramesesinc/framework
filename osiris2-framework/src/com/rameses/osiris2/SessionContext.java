@@ -15,7 +15,6 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -66,9 +65,11 @@ public class SessionContext {
     }
     
     //the default permission is allow true. The exception is false.
-    public boolean checkPermission(String workunitid, String name) {
-        if( name == null ) return true;
+    //this is being called
+    public boolean checkPermission(String domain, String role, String name) {
+        if(role==null && name == null ) return true;
 
+        /*
         String perm = null;
         Matcher m = EXT_PERM_PATTERN.matcher(name);
         if ( m.matches() ) {
@@ -80,20 +81,10 @@ public class SessionContext {
         } else {
             perm = workunitid + "." + name;
         }
-        return securityProvider.checkPermission(perm);
+         */
+        return securityProvider.checkPermission(domain, role, name);
     }
     
-    public boolean checkRoles(String name) {
-        if( name  == null  ) return true;
-        return securityProvider.checkRoles(name);
-    }
-    
-    //combined permission and roles
-    public boolean checkSecurity(String workunitid, String roles, String permission) {
-        boolean checkRole = checkRoles(roles);
-        boolean checkPermission = checkPermission(workunitid, permission);
-        return checkRole && checkPermission;
-    }
     
     //if there is no type specified set this as folder
     public List getInvokers() {
@@ -112,7 +103,6 @@ public class SessionContext {
     
     public List getInvokers( String type, boolean applySecurity ) {
         if (type == null) type = "folder";
-        
         if (!invokers.containsKey(type)) {
             List list = new ArrayList();
                         
@@ -120,16 +110,16 @@ public class SessionContext {
             while (iter.hasNext()) {
                 Invoker inv = (Invoker)iter.next();
                 String itype = (inv.getType() == null) ? "folder" : inv.getType();
-                boolean showIt = true;
-                
-                String permission = inv.getPermission();
-                if( permission!=null && permission.trim().length()>0) {
-                    showIt = checkInvoker(inv);
-                }
-                if (showIt && itype.matches(type)) {
-                    if (applySecurity == false || checkSecurity(inv.getWorkunitid(), inv.getRoles(), permission )) {
-                        list.add(inv);
+                if(itype.matches(type) ) {
+                    boolean showIt = true;
+                    String permission = inv.getPermission();
+                    String role = inv.getRole();
+                    String domain = inv.getDomain();
+                    if(applySecurity && (role!=null || permission!=null)) {
+                        showIt = checkPermission(domain, role, permission );
                     }
+                    if(showIt) showIt = checkInvoker(inv);
+                    if (showIt) list.add(inv);
                 }
             }
             Collections.sort(list);

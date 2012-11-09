@@ -14,7 +14,6 @@ import com.rameses.platform.interfaces.Platform;
 import com.rameses.rcp.framework.ClientContext;
 import com.rameses.rcp.framework.ClientSecurityProvider;
 import com.rameses.rcp.framework.UIControllerPanel;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,11 +53,13 @@ public class OsirisSubAppLoader implements AppLoader {
             OsirisContext.setSession(startupApp);
             
             //if there are permissions specified from the calling platform
+            /*
             Object perms = env.get("permissions");
             if ( perms != null && perms instanceof Collection ) {
                 OsirisSecurityProvider sp = (OsirisSecurityProvider) OsirisContext.getSession().getSecurityProvider();
                 sp.getPermissions().addAll( (Collection) perms );
             }
+            */
             
             //if there are virtualEnv specified from the calling platform
             Object virtualEnv = env.get("virtualEnv");

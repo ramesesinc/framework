@@ -14,6 +14,9 @@ public class Transition {
     private String rendered;
     private Map properties = new HashMap();
     
+    private String role;
+    private String domain;
+    
     public Transition() {
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
@@ -86,6 +89,22 @@ public class Transition {
 
     public void setRendered(String rendered) {
         this.rendered = rendered;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getDomain() {
+        return domain;
+    }
+
+    public void setDomain(String domain) {
+        this.domain = domain;
     }
 
    

@@ -102,8 +102,7 @@ public class CmsFilter implements Filter {
                     Folder folder = project.getFileManager().getFolder("/");
                     File ff = ProjectUtils.findFirstVisibleFile( folder );
                     if( ff!=null) spath = ff.getPath();
-                }
-                else {
+                } else {
                     if(spath.endsWith("/")) spath = spath.substring(0, spath.length()-1);
                 }
                 
@@ -112,14 +111,12 @@ public class CmsFilter implements Filter {
                 FileInstance file = null;
                 try {
                     file = project.getFileManager().getFile( filename, params );
-                }
-                catch(com.rameses.anubis.FileNotFoundException fe) {
+                } catch(com.rameses.anubis.FileNotFoundException fe) {
                     hres.setStatus(HttpServletResponse.SC_NOT_FOUND);
                     file = project.getFileManager().getFile( "/404.pg", params );
                     ResponseWriter.write(app,hreq,hres,mimeType,file.getContent());
                     return;
-                }
-                catch(Exception e) {
+                } catch(Exception e) {
                     e.printStackTrace();
                     throw new ServletException(e.getMessage());
                 }
@@ -130,17 +127,10 @@ public class CmsFilter implements Filter {
                 }
                 
                 SessionContext ctx = AnubisContext.getCurrentContext().getSession();
-
+                
                 //set authenicated as true if there is sessionid
                 boolean allow_access = true;
-                if(file.isSecured())
-                {
-                    if( !ctx.isLoggedIn() )
-                        allow_access = false;
-                    else if( !ctx.checkFilePermission(file) )
-                        allow_access = false;
-                }
-                
+                if(file.isSecured() && !ctx.isLoggedIn()) allow_access = false;
                 if( !allow_access) {
                     String path = CmsWebConstants.LOGIN_PAGE_PATH;
                     String requestPath = hreq.getRequestURI();
@@ -148,13 +138,38 @@ public class CmsFilter implements Filter {
                     if(qry!=null && qry.trim().length()>0){
                         requestPath += "?"+ qry;
                     }
-                    hres.sendRedirect(path  + "?target=" + URLEncoder.encode(requestPath));
-                } else {
+                    
+                    if(!file.isFragment()) {
+                        hres.sendRedirect(path  + "?target=" + URLEncoder.encode(requestPath));
+                    }
+                    else {
+                        file = project.getFileManager().getFile( "/reload.pg", params );
+                        ResponseWriter.write(app,hreq,hres,mimeType,file.getContent());
+                    }
+                } 
+                else {
+                    boolean authorized = true;
+                    String domain = file.getDomain();
+                    String role = file.getRole();
+                    String permission = file.getPermission();
+                    
+                    if(role!=null || permission!=null) {
+                        authorized = ctx.checkPermission(domain, role, permission);
+                    }
+                    
+                    //if no permission, redirect to a non-authorized page
+                    if( !authorized ) {
+                        hres.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                        file = project.getFileManager().getFile( "/403.pg", params );
+                        ResponseWriter.write(app,hreq,hres,mimeType,file.getContent());
+                        return;
+                    }
+                    
                     InputStream is = file.getContent();
                     ResponseWriter.write(app,hreq,hres,mimeType,is);
+                    
                 }
-            }
-            else {
+            } else {
                 filterChain.doFilter(servletRequest, servletResponse);
             }
         } catch(Exception e) {

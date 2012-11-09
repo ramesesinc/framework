@@ -156,10 +156,12 @@ public class CustomModule extends Module {
                 }
             }
         };
-        FileDir.scan( getUrl()+ROOT_DIR + name, filter );
+        String mpath = ContentUtil.correctUrlPath( getUrl(), ROOT_DIR, name);
+        FileDir.scan( mpath, filter );
         if( getProvider() !=null ) {
             try {
-                FileDir.scan( getProvider()+ROOT_DIR + name, filter );
+                String ppath = ContentUtil.correctUrlPath( getProvider(), ROOT_DIR, name );
+                FileDir.scan( ppath, filter );
             } catch(Exception ex) {
                 System.out.println("error scan dir in provider->"+ex.getMessage());
             }

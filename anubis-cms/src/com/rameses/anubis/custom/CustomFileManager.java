@@ -47,7 +47,7 @@ public class CustomFileManager extends FileManager {
                 return m.getFolderItems( arr[1] );
             }
             final String name = (sname.equals("/")) ? "" : sname;
-            String rootUrl = project.getUrl()+getDir()+name ;
+            String rootUrl = ContentUtil.correctUrlPath( project.getUrl(),getDir(),name) ;
             
             //return a list of filenames under a folder;
             final Set<String> items = new LinkedHashSet();

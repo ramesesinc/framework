@@ -12,15 +12,8 @@ public class SecurityProviderImpl implements ClientSecurityProvider {
     public SecurityProviderImpl() {
     }
     
-    public boolean checkRoles(String name) {
-        if(name==null) return true;
-        for(String s: roles) {
-            if(name.matches(s)) return true;
-        }
-        return false;
-    }
     
-    public boolean checkPermission(String name) {
+    public boolean checkPermission(String domain, String role, String name) {
         if(name==null) return true;
         for(String s: permissions) {
             if(name.matches(s)) return true;

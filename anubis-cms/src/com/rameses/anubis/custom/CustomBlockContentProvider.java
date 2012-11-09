@@ -62,7 +62,7 @@ public class CustomBlockContentProvider extends BlockContentProvider {
          **********************************************************************/
         String blockname = pageBlockname.substring( pageBlockname.lastIndexOf("/")+1 );
         if(module!=null) {
-            is = module.getBlockResource( blockname );
+            is = module.getGlobalBlockResource( blockname );
             if(is!=null) return is;
         }
 

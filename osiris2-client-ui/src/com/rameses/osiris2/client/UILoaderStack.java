@@ -69,7 +69,7 @@ public class UILoaderStack extends Stack {
                 ClientContext ctx = ClientContext.getCurrentContext();
                 
                 //check permission
-                if ( !sessCtx.checkPermission(i.getWorkunitid(), i.getPermission()) ) {
+                if ( !sessCtx.checkPermission(i.getDomain(),i.getRole(), i.getPermission()) ) {
                     loaders.remove(0);
                     continue;
                 }

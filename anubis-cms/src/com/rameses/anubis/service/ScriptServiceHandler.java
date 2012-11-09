@@ -9,6 +9,7 @@
 
 package com.rameses.anubis.service;
 
+import com.rameses.anubis.AnubisContext;
 import com.rameses.anubis.ServiceInvoker;
 import com.rameses.classutils.ClassDefMap;
 import com.rameses.service.EJBServiceContext;
@@ -42,6 +43,7 @@ public class ScriptServiceHandler  extends AbstractServiceHandler {
         if(appContext==null) appContext = (String)conf.get("context");
         if(appContext == null )
             throw new RuntimeException("app.context is not defined");
+        
         Map map = new HashMap();
         map.put("app.host", host);
         map.put("app.context", appContext);
@@ -83,6 +85,12 @@ public class ScriptServiceHandler  extends AbstractServiceHandler {
                     env.put( me.getKey(), me.getValue() );
                 }
             }
+            
+            AnubisContext actx = AnubisContext.getCurrentContext();
+            if(actx!=null && actx.getSession()!=null) {
+                env.putAll( actx.getSession().getEnv() );
+            }
+            
             serviceProxy = ctx.create( name, env );
         }
         public Object invokeMethod(String methodName, Object[] args) {

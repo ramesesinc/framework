@@ -38,7 +38,7 @@ public final class RuleManager {
     
     public void loadAll() throws Exception {
         System.setProperty("drools.dateformat", "yyyy-MM-dd HH:mm");
-        System.out.println("STARTING RULE SERVER @ " + new Date() );
+        System.out.println("STARTING RULE SERVER V3 " + new Date() );
         SqlContext sqlc = createSqlContext();
         
         RuleSetScanner scanner = new RuleSetScanner(sqlc);

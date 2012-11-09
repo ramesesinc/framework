@@ -37,7 +37,7 @@ public class RuleSetScanner implements URLFilter {
         while(e.hasMoreElements()) {
             URL u = e.nextElement();
             URLDirectory ud = new URLDirectory(u);
-            ud.list( this,classLoader );
+            ud.list( this );
         }
     }
     
@@ -50,6 +50,8 @@ public class RuleSetScanner implements URLFilter {
         }
         return false;
     }
+    
+    
     
     private void loadNamesFromDb() {
         try{

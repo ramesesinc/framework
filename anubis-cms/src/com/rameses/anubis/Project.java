@@ -45,6 +45,25 @@ public abstract class Project extends HashMap  {
         super.put("url", url);
         Map map = getInfo();
         super.putAll( map );
+        
+        boolean editable = false;
+        try {    
+            editable = Boolean.valueOf( super.get("editable") +"" );
+        }
+        catch(Exception ign){;}
+        super.put("editable", editable);
+        
+        boolean cached = false;
+        if( !super.containsKey("cached")) {
+            if(editable) cached = false;
+        }
+        else {
+            try {
+                cached = Boolean.valueOf(super.get("cached")+"");
+            }
+            catch(Exception ign){;}
+        }
+        super.put("cached", cached);
     }
     
     public String getName() {
@@ -81,6 +100,14 @@ public abstract class Project extends HashMap  {
         return getThemes().get(themeName);
     }
     
+    public boolean isEditable() {
+       return Boolean.valueOf( super.get("editable")+"");
+    }
+    
+    public boolean isCached() {
+       return Boolean.valueOf( super.get("cached")+"" );
+    }
+
     /**************************************************************************
      * LOCALE MANAGER
      **************************************************************************/

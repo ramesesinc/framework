@@ -46,6 +46,7 @@ public abstract class ServiceManager {
         Map conf = null;
         if( !cache.containsKey(confName)) {
             Map m = getServiceAdapterInfo(confName);
+            m = new PropertyMap(m);
             cache.put(confName, m);
         }
         return cache.get(confName);

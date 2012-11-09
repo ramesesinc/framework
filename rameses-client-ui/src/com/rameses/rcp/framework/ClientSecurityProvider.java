@@ -11,6 +11,6 @@ package com.rameses.rcp.framework;
 
 
 public interface ClientSecurityProvider {
-    boolean checkRoles(String name);
-    boolean checkPermission(String name);
+    
+    boolean checkPermission(String domain, String role, String name);
 }

@@ -15,6 +15,8 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Map;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -43,12 +45,10 @@ public class ContentUtil {
         try {
             is = findResource(path1, path2,path3);
             return (is!=null);
-        }
-        catch(Exception e) {
+        } catch(Exception e) {
             //do nothing
             return false;
-        }
-        finally {
+        } finally {
             try {is.close();} catch(Exception ign){;}
         }
     }
@@ -79,7 +79,7 @@ public class ContentUtil {
     
     
     /**
-     * locates a file, opens the inputstream then run the Json utility. 
+     * locates a file, opens the inputstream then run the Json utility.
      * if file does not exist, null is returned
      */
     public static Map getJsonMap(URL u) {
@@ -150,5 +150,33 @@ public class ContentUtil {
             try {is.close(); } catch(Exception ign){;}
         }
     }
-   
+    
+    
+    public static String replaceSysProperty(String name) {
+        AnubisContext ctx = AnubisContext.getCurrentContext();
+        Project proj = null;
+        if(ctx!=null) {
+            proj = ctx.getProject();
+        }
+        Pattern p = Pattern.compile("\\$\\{.*?\\}");
+        Matcher m = p.matcher(name);
+        StringBuffer sb = new StringBuffer();
+        String s1 = name;
+        int start = 0;
+        while(m.find()) {
+            sb.append( s1.substring(start, m.start()) );
+            String s = m.group();
+            s = s.replaceAll("\\$|\\{|\\}","");
+            
+            String value = "";
+            if( proj!=null ) value = (String)proj.get(s);
+            if(value==null) value = System.getProperty(s);
+            sb.append(value);
+            start = m.end();
+        }
+        if( start < s1.length()  ) sb.append( s1.substring(start));
+        return sb.toString();
+    }
+    
+    
 }

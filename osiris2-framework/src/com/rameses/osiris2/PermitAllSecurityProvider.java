@@ -14,11 +14,7 @@ package com.rameses.osiris2;
  */
 public class PermitAllSecurityProvider implements SecurityProvider {
     
-    public boolean checkRoles(String name) {
-        return true;
-    }
-
-    public boolean checkPermission(String name) {
+    public boolean checkPermission(String domain, String role, String name) {
         return true;
     }
     

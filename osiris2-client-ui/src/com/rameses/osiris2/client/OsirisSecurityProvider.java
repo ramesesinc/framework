@@ -11,49 +11,33 @@ package com.rameses.osiris2.client;
 
 import com.rameses.osiris2.SecurityProvider;
 import com.rameses.rcp.framework.ClientSecurityProvider;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 public class OsirisSecurityProvider implements SecurityProvider, ClientSecurityProvider {
-    
-    private List<String> permissions = new ArrayList<String>();
-    private List<String> roles = new ArrayList<String>();
     
     public OsirisSecurityProvider() {
     }
 
-    public boolean checkRoles(String name) {
-        if(name==null) return true;
-        for(String s: roles) {
-            if(name.matches(s)) return true;
-        }
-        return false;
-    }
 
-    public boolean checkPermission(String name) {
+    public boolean checkPermission(String domain, String role, String name) {
+        Map roles = (Map) OsirisContext.getEnv().get("ROLES");
+        if(roles!=null && role!=null ) {
+            if(domain!=null) role = domain+"."+role;
+            if(! roles.containsKey(role)) return false;
+            if(name==null || name.trim().length()==0) return true;
+            String disallowed = (String)roles.get(role);
+            if(name.matches(disallowed))return false; 
+            return true;
+        } 
+        if(roles!=null) {
+            String allowed = (String)roles.get("ALLOWED");
+            if(allowed!=null && name.matches(allowed)) return true;
+            return false;
+        }
+        
         if (name == null) return true;
-        for (String s: permissions) {
-            if (name.matches(s)) return true;
-        }
         return false;
     }
 
-    public List<String> getPermissions() {
-        return permissions;
-    }
-
-    public void setPermissions(List<String> permissions) {
-        this.permissions = permissions;
-    }
-
-    public List<String> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
-    }
-    
-    
     
 }

@@ -54,7 +54,9 @@ public class File extends HashMap implements Comparable {
         super.put("fragment", frag );
         
         String id = getId();
-        super.put("name", id.substring(1,id.lastIndexOf(".")).replace("/", "-"));
+        if(!super.containsKey("name")) {
+            super.put("name", id.substring(1,id.lastIndexOf(".")).replace("/", "-"));
+        }
         
         super.put("pagename", id.substring( id.lastIndexOf("/")+1, id.lastIndexOf(".")) );
     }
@@ -105,6 +107,16 @@ public class File extends HashMap implements Comparable {
     
     public String getModule() {
         return (String)super.get("module");
+    }
+    
+    public String getPermission() {
+        return (String)super.get("permission");
+    }
+    public String getRole() {
+        return (String)super.get("role");
+    }
+    public String getDomain() {
+        return (String)super.get("domain");
     }
     
     public int compareTo(Object o) {

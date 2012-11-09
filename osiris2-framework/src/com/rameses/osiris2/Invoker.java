@@ -25,12 +25,15 @@ public class Invoker implements Serializable, Comparable {
     private String caption;
     private String ref;
     private String type = "folder";
-    private String permission;
     private Integer index;
     private String action;
     private Map properties = new HashMap();
-    private String roles;
+
     private Module module;
+
+    private String role;
+    private String domain;
+    private String permission;
     
     public Invoker() {
         
@@ -137,12 +140,12 @@ public class Invoker implements Serializable, Comparable {
         this.workunitid = workunitid;
     }
 
-    public String getRoles() {
-        return roles;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoles(String roles) {
-        this.roles = roles;
+    public void setRole(String roles) {
+        this.role = roles;
     }
 
     public Module getModule() {
@@ -159,6 +162,14 @@ public class Invoker implements Serializable, Comparable {
 
     public void setWorkunitname(String workunitname) {
         this.workunitname = workunitname;
+    }
+
+    public String getDomain() {
+        return domain;
+    }
+
+    public void setDomain(String domain) {
+        this.domain = domain;
     }
 
    

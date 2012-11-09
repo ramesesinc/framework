@@ -49,11 +49,13 @@ public class NavigationHandlerImpl implements NavigationHandler {
                 
                 UIController opCon = opener.getController();
                 String permission = opener.getPermission();
+                String role = opener.getRole();
+                String domain = opener.getDomain();
                 
                 //check permission(if specified) if allowed
                 if ( !ValueUtil.isEmpty(permission) ) {
                     permission = opCon.getName() + "." + permission;
-                    if( !ControlSupport.isPermitted(permission) ) {
+                    if( !ControlSupport.isPermitted(domain, role, permission) ) {
                         MsgBox.err("You don't have permission to perform this transaction.");
                         return;
                     }
