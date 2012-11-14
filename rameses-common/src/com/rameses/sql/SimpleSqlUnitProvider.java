@@ -41,7 +41,6 @@ public class SimpleSqlUnitProvider extends SqlUnitProvider {
             if(name.indexOf(":")>0) {
                 String resName = name.substring( 0, name.indexOf(":") );
                 String subName = name.substring(name.indexOf(":")+1, name.indexOf(".sql"));
-                
                 if( getDialect() != null ) {
                     String dname = getDialect().getName();
                     try {

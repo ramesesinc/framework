@@ -1,0 +1,27 @@
+<workunit>
+    <invokers>
+        <invoker folderid="/menu/explorer"  windowmode="explorer" caption="Master Management" action="init" 
+            index="1"/>
+    </invokers>
+    
+    <code>
+        <![CDATA[
+        
+        import com.rameses.rcp.common.*;
+        import com.rameses.rcp.annotations.*;
+        import com.rameses.osiris2.client.*;
+        
+        public class TreeExplorerController extends system.explorer.AbstractTreeExplorer {
+            public void init() {
+                def root = [id:'/explorer/master', caption:'Master Management'];
+                doInit( root );
+            }
+        }
+        
+        ]]>
+    </code>
+    
+    <pages>
+        <page template="system.explorer.ui.TreeExplorerPage"/>
+    </pages>
+</workunit>

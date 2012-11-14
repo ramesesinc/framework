@@ -26,7 +26,7 @@ public class OsirisSecurityProvider implements SecurityProvider, ClientSecurityP
             if(! roles.containsKey(role)) return false;
             if(name==null || name.trim().length()==0) return true;
             String disallowed = (String)roles.get(role);
-            if(name.matches(disallowed))return false; 
+            if(disallowed!=null && name.matches(disallowed))return false; 
             return true;
         } 
         if(roles!=null) {

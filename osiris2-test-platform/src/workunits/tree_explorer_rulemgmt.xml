@@ -1,0 +1,27 @@
+<workunit>
+    <invokers>
+        <invoker folderid="/menu/explorer"  windowmode="explorer"  caption="Rule Management" action="init" 
+            permission="system" index="5"/>
+    </invokers>
+    
+    <code>
+        <![CDATA[
+        
+        import com.rameses.rcp.common.*;
+        import com.rameses.rcp.annotations.*;
+        import com.rameses.osiris2.client.*;
+        
+        public class TreeExplorerController extends system.explorer.AbstractTreeExplorer {
+            public void init() {
+                def root = [id:'/explorer/rulemgmt', caption:'Rule Management'];
+                doInit( root );
+            }
+        }
+        
+        ]]>
+    </code>
+    
+    <pages>
+        <page template="system.explorer.ui.TreeExplorerPage"/>
+    </pages>
+</workunit>

@@ -1,0 +1,9 @@
+"entity.*"[mode=='create']{
+    enabled: true;
+}
+"entity.*"[mode=='edit']{
+    enabled: true;
+}
+"entity.*"[mode=='read']{
+    enabled: false;
+}

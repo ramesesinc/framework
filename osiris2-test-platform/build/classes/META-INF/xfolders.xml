@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<folders>
+    <folder id="menu">
+        <folder id="system" caption="System" index="-1"/>
+        <folder id="mgmt" caption="Management" index="5"/>
+        <folder id="explorer" caption="Explorer" />
+        <folder id="help" caption="Help" index="9999"/>
+    </folder>
+    
+    <folder id="report" caption="Reports"/>
+    <folder id="txn" caption="Transactions"/>
+    
+    <!-- hooks for explorer elements -->
+    <folder id="explorer">
+        <folder id="txn" caption="Transactions" index="0"/>
+        <folder id="master" caption="Master Management" index="1"/>
+        <folder id="txnmgmt" caption="Transaction Management" index="2"/>
+        <folder id="report" caption="Reports" index="4"/>
+        <folder id="rulemgmt" caption="Rule Management" index="3"/>        
+        <folder id="setting" caption="Settings Management" index="5"/>
+    </folder>
+
+    
+</folders>
