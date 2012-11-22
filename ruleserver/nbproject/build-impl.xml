@@ -226,40 +226,34 @@ is divided into following sections:
         <!-- You can override this target in the ../build.xml file. -->
     </target>
     <target name="library-inclusion-in-archive" depends="compile">
-        <copy file="${libs.drools_5.0.classpath.libfile.8}" todir="${build.classes.dir}"/>
-        <copy file="${libs.drools_5.0.classpath.libfile.7}" todir="${build.classes.dir}"/>
-        <copy file="${libs.drools_5.0.classpath.libfile.6}" todir="${build.classes.dir}"/>
-        <copy file="${libs.drools_5.0.classpath.libfile.5}" todir="${build.classes.dir}"/>
-        <copy file="${libs.drools_5.0.classpath.libfile.4}" todir="${build.classes.dir}"/>
-        <copy file="${libs.drools_5.0.classpath.libfile.3}" todir="${build.classes.dir}"/>
-        <copy file="${libs.drools_5.0.classpath.libfile.2}" todir="${build.classes.dir}"/>
-        <copy file="${libs.drools_5.0.classpath.libfile.1}" todir="${build.classes.dir}"/>
-        <copy file="${reference.rameses-server-common.jar}" todir="${build.classes.dir}"/>
-        <copy file="${reference.rameses-common.jar}" todir="${build.classes.dir}"/>
+        <copy file="${libs.drools-libs.classpath.libfile.8}" todir="${build.classes.dir}"/>
+        <copy file="${libs.drools-libs.classpath.libfile.7}" todir="${build.classes.dir}"/>
+        <copy file="${libs.drools-libs.classpath.libfile.6}" todir="${build.classes.dir}"/>
+        <copy file="${libs.drools-libs.classpath.libfile.5}" todir="${build.classes.dir}"/>
+        <copy file="${libs.drools-libs.classpath.libfile.4}" todir="${build.classes.dir}"/>
+        <copy file="${libs.drools-libs.classpath.libfile.3}" todir="${build.classes.dir}"/>
+        <copy file="${libs.drools-libs.classpath.libfile.2}" todir="${build.classes.dir}"/>
+        <copy file="${libs.drools-libs.classpath.libfile.1}" todir="${build.classes.dir}"/>
     </target>
     <target name="library-inclusion-in-manifest" depends="compile">
-        <basename property="included.lib.libs.drools_5.0.classpath.8" file="${libs.drools_5.0.classpath.libfile.8}"/>
-        <basename property="included.lib.libs.drools_5.0.classpath.7" file="${libs.drools_5.0.classpath.libfile.7}"/>
-        <basename property="included.lib.libs.drools_5.0.classpath.6" file="${libs.drools_5.0.classpath.libfile.6}"/>
-        <basename property="included.lib.libs.drools_5.0.classpath.5" file="${libs.drools_5.0.classpath.libfile.5}"/>
-        <basename property="included.lib.libs.drools_5.0.classpath.4" file="${libs.drools_5.0.classpath.libfile.4}"/>
-        <basename property="included.lib.libs.drools_5.0.classpath.3" file="${libs.drools_5.0.classpath.libfile.3}"/>
-        <basename property="included.lib.libs.drools_5.0.classpath.2" file="${libs.drools_5.0.classpath.libfile.2}"/>
-        <basename property="included.lib.libs.drools_5.0.classpath.1" file="${libs.drools_5.0.classpath.libfile.1}"/>
-        <copy file="${libs.drools_5.0.classpath.libfile.8}" todir="${dist.ear.dir}"/>
-        <copy file="${libs.drools_5.0.classpath.libfile.7}" todir="${dist.ear.dir}"/>
-        <copy file="${libs.drools_5.0.classpath.libfile.6}" todir="${dist.ear.dir}"/>
-        <copy file="${libs.drools_5.0.classpath.libfile.5}" todir="${dist.ear.dir}"/>
-        <copy file="${libs.drools_5.0.classpath.libfile.4}" todir="${dist.ear.dir}"/>
-        <copy file="${libs.drools_5.0.classpath.libfile.3}" todir="${dist.ear.dir}"/>
-        <copy file="${libs.drools_5.0.classpath.libfile.2}" todir="${dist.ear.dir}"/>
-        <copy file="${libs.drools_5.0.classpath.libfile.1}" todir="${dist.ear.dir}"/>
-        <basename property="included.lib.reference.rameses-server-common.jar" file="${reference.rameses-server-common.jar}"/>
-        <copy file="${reference.rameses-server-common.jar}" todir="${dist.ear.dir}"/>
-        <basename property="included.lib.reference.rameses-common.jar" file="${reference.rameses-common.jar}"/>
-        <copy file="${reference.rameses-common.jar}" todir="${dist.ear.dir}"/>
+        <basename property="included.lib.libs.drools-libs.classpath.8" file="${libs.drools-libs.classpath.libfile.8}"/>
+        <basename property="included.lib.libs.drools-libs.classpath.7" file="${libs.drools-libs.classpath.libfile.7}"/>
+        <basename property="included.lib.libs.drools-libs.classpath.6" file="${libs.drools-libs.classpath.libfile.6}"/>
+        <basename property="included.lib.libs.drools-libs.classpath.5" file="${libs.drools-libs.classpath.libfile.5}"/>
+        <basename property="included.lib.libs.drools-libs.classpath.4" file="${libs.drools-libs.classpath.libfile.4}"/>
+        <basename property="included.lib.libs.drools-libs.classpath.3" file="${libs.drools-libs.classpath.libfile.3}"/>
+        <basename property="included.lib.libs.drools-libs.classpath.2" file="${libs.drools-libs.classpath.libfile.2}"/>
+        <basename property="included.lib.libs.drools-libs.classpath.1" file="${libs.drools-libs.classpath.libfile.1}"/>
+        <copy file="${libs.drools-libs.classpath.libfile.8}" todir="${dist.ear.dir}"/>
+        <copy file="${libs.drools-libs.classpath.libfile.7}" todir="${dist.ear.dir}"/>
+        <copy file="${libs.drools-libs.classpath.libfile.6}" todir="${dist.ear.dir}"/>
+        <copy file="${libs.drools-libs.classpath.libfile.5}" todir="${dist.ear.dir}"/>
+        <copy file="${libs.drools-libs.classpath.libfile.4}" todir="${dist.ear.dir}"/>
+        <copy file="${libs.drools-libs.classpath.libfile.3}" todir="${dist.ear.dir}"/>
+        <copy file="${libs.drools-libs.classpath.libfile.2}" todir="${dist.ear.dir}"/>
+        <copy file="${libs.drools-libs.classpath.libfile.1}" todir="${dist.ear.dir}"/>
         <manifest file="${build.ear.classes.dir}/META-INF/MANIFEST.MF" mode="update">
-            <attribute name="Class-Path" value="${included.lib.libs.drools_5.0.classpath.1} ${included.lib.libs.drools_5.0.classpath.2} ${included.lib.libs.drools_5.0.classpath.3} ${included.lib.libs.drools_5.0.classpath.4} ${included.lib.libs.drools_5.0.classpath.5} ${included.lib.libs.drools_5.0.classpath.6} ${included.lib.libs.drools_5.0.classpath.7} ${included.lib.libs.drools_5.0.classpath.8} ${included.lib.reference.rameses-server-common.jar} ${included.lib.reference.rameses-common.jar} "/>
+            <attribute name="Class-Path" value="${included.lib.libs.drools-libs.classpath.1} ${included.lib.libs.drools-libs.classpath.2} ${included.lib.libs.drools-libs.classpath.3} ${included.lib.libs.drools-libs.classpath.4} ${included.lib.libs.drools-libs.classpath.5} ${included.lib.libs.drools-libs.classpath.6} ${included.lib.libs.drools-libs.classpath.7} ${included.lib.libs.drools-libs.classpath.8} "/>
         </manifest>
     </target>
     <target name="-copy-meta-inf">

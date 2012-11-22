@@ -5,9 +5,7 @@
         <data xmlns="http://www.netbeans.org/ns/j2ee-ejbjarproject/3">
             <name>ruleserver</name>
             <minimum-ant-version>1.6</minimum-ant-version>
-            <included-library files="8">libs.drools_5.0.classpath</included-library>
-            <included-library files="1">reference.rameses-server-common.jar</included-library>
-            <included-library files="1">reference.rameses-common.jar</included-library>
+            <included-library files="8">libs.drools-libs.classpath</included-library>
             <source-roots>
                 <root id="src.dir"/>
             </source-roots>

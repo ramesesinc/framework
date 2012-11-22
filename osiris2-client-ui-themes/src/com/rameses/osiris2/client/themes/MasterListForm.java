@@ -29,6 +29,7 @@ public class MasterListForm extends javax.swing.JPanel {
         xLabel1 = new com.rameses.rcp.control.XLabel();
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel3 = new javax.swing.JPanel();
+        xDataTable1 = new com.rameses.rcp.control.XDataTable();
         xSubFormPanel1 = new com.rameses.rcp.control.XSubFormPanel();
 
         setLayout(new java.awt.BorderLayout());
@@ -49,10 +50,15 @@ public class MasterListForm extends javax.swing.JPanel {
 
         jSplitPane1.setDividerLocation(250);
         jSplitPane1.setDividerSize(10);
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder1 = new com.rameses.rcp.control.border.XTitledBorder();
         xTitledBorder1.setTitle("Listing");
         jPanel3.setBorder(xTitledBorder1);
         jPanel3.setPreferredSize(new java.awt.Dimension(400, 400));
+        xDataTable1.setHandler("listHandler");
+        jPanel3.add(xDataTable1, java.awt.BorderLayout.CENTER);
+
         jSplitPane1.setLeftComponent(jPanel3);
 
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder2 = new com.rameses.rcp.control.border.XTitledBorder();
@@ -72,6 +78,7 @@ public class MasterListForm extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSplitPane jSplitPane1;
+    private com.rameses.rcp.control.XDataTable xDataTable1;
     private com.rameses.rcp.control.XLabel xLabel1;
     private com.rameses.rcp.control.XSubFormPanel xSubFormPanel1;
     // End of variables declaration//GEN-END:variables
